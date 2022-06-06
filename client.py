@@ -1,4 +1,4 @@
-import pip
+import pip,os
 import socket, threading, sys, subprocess, os, time
 import shlex
 from threading import Timer
@@ -103,31 +103,30 @@ def extract_ip():
         st.close()
     return IP
 
-def restart(cmd):
-    co = 0
-    найти файлы с названием 2001_1_Continue.bat
-    и их все запустить
-    prog = f'screen -dmS wif ./{co}_restart -range {cmd}'
-    args = shlex.split(prog)
-    print(prog)
-    try:
-        result = subprocess.run(args)
-    except:
-        print('[E] ERROR run application')
-        logger_err.error(f'[E] {extract_ip()} | ERROR run application')
-        return f'[E] {extract_ip()} | ERROR run application'
-    finally:
-        time.sleep(5)
-    if result.returncode !=0: 
-        print('[E] ERROR run application')
-        logger_err.error(f'[E] {extract_ip()} | ERROR run application')
-        return f'[E] {extract_ip()} | ERROR run application'
-    else:
-        res = stat()
-        print(f'[I] {extract_ip()} | Programm wif500_86 run, total processes {res}')
-        logger_info.info(f'[I] {extract_ip()} | Programm wif500_86 run, total processes {res}')
-        logger_info.info(f'[I] {prog}')
-        return f'[I] {extract_ip()} | Programm wif500_86 run, total processes {res}'
+def restart():
+    list_file = os.listdir()
+    for ld in list_file:
+        if ld.find('Continue'):
+            ff = open(ld)
+            rl = ff.readline().strip()[18:]
+            prog = f'screen -dmS wif ./wif500_86 {rl}'
+            args = shlex.split(prog)
+            print(prog)
+            try:
+                result = subprocess.run(args)
+            except:
+                print('[E] ERROR run application')
+                logger_err.error(f'[E] {extract_ip()} | ERROR run application')
+            finally:
+                time.sleep(5)
+            if result.returncode !=0: 
+                print('[E] ERROR run application')
+                logger_err.error(f'[E] {extract_ip()} | ERROR run application')
+            else:
+                res = stat()
+                print(f'[I] {extract_ip()} | Programm wif500_86 run, total processes {res}')
+                logger_info.info(f'[I] {extract_ip()} | Programm wif500_86 run, total processes {res}')
+                logger_info.info(f'[I] {prog}')
 
 def runing(cmd):
     prog = f'screen -dmS wif ./wif500_86 -range {cmd}'
