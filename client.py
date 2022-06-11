@@ -108,9 +108,10 @@ def restart():
     for ld in list_file:
         if ld.find('Continue'):
             ff = open(ld)
-            rl = ff.readline().strip()[18:]
+            rl = ff.readline().strip().encode('utf-8')[18:]
             prog = f'screen -dmS wif ./wif500_86 {rl}'
             args = shlex.split(prog)
+            ff.close()
             print(prog)
             try:
                 result = subprocess.run(args)
