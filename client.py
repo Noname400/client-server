@@ -106,9 +106,9 @@ def extract_ip():
 def restart():
     list_file = os.listdir()
     for ld in list_file:
-        if ld.find('Continue'):
+        if ld.find('Continue') > 0:
             ff = open(ld)
-            rl = ff.readline().strip().encode('utf-8')[18:]
+            rl = ff.readline().strip()[16:]
             prog = f'screen -dmS wif ./wif500_86 {rl}'
             args = shlex.split(prog)
             ff.close()
