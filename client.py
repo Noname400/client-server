@@ -108,17 +108,18 @@ def restart():
     rl1=''
     list_file = os.listdir()
     for ld in list_file:
-        print(f'LD-----{ld}')
+        print(f'list programm {ld}')
         if ld.find('Continue') > 0:
             ff = open(ld)
             rl = ff.readline().strip()
             if rl.find("wif500-30xx.exe") >= 0: rl1 = rl.replace("wif500-30xx.exe", "./wif500_86")
             if rl.find("wif500-20xx.exe") >= 0: rl1 = rl.replace("wif500-20xx.exe", "./wif500_86")
             if rl.find("WifSolverCuda.exe") >= 0: rl1 = rl.replace("WifSolverCuda.exe", "./wif500_86")
+            if rl.find("wif500_86") >= 0: rl1 = rl.replace("wif500_86", "./wif500_86")
             prog = f'screen -dmS wif {rl1}'
             args = shlex.split(prog)
             ff.close()
-            print(prog)
+            print(f'command run - {prog}')
             try:
                 result = subprocess.run(args)
             except:
