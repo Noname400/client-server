@@ -108,7 +108,7 @@ def restart():
     for ld in list_file:
         if ld.find('Continue') > 0:
             ff = open(ld)
-            rl = ff.readline().strip()[16:]
+            rl = ff.readline().strip()[18:]
             prog = f'screen -dmS wif ./wif500_86 {rl}'
             args = shlex.split(prog)
             ff.close()
