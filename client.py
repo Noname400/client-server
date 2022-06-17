@@ -175,7 +175,7 @@ def stat():
     return f'[I] {extract_ip()} | Run wif500_86 count: {cou}'
 
 if __name__ == "__main__":
-    version = '2.2'
+    version = '2.3'
     print(f'START: {date_str()}')
     print(f'Version {version}')
     print(f'Ваш IP: {extract_ip()}')
