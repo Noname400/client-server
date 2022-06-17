@@ -112,10 +112,12 @@ def restart():
         if ld.find('Continue') > 0:
             ff = open(ld)
             rl = ff.readline().strip()
+            print(f'проверочная строка {rl}')
             if rl.find("wif500-30xx.exe") >= 0: rl1 = rl.replace("wif500-30xx.exe", "./wif500_86")
             if rl.find("wif500-20xx.exe") >= 0: rl1 = rl.replace("wif500-20xx.exe", "./wif500_86")
             if rl.find("WifSolverCuda.exe") >= 0: rl1 = rl.replace("WifSolverCuda.exe", "./wif500_86")
             if rl.find("wif500_86") >= 0: rl1 = rl.replace("wif500_86", "./wif500_86")
+            
             prog = f'screen -dmS wif {rl1}'
             args = shlex.split(prog)
             ff.close()
@@ -173,7 +175,7 @@ def stat():
     return f'[I] {extract_ip()} | Run wif500_86 count: {cou}'
 
 if __name__ == "__main__":
-    version = '2.1'
+    version = '2.2'
     print(f'START: {date_str()}')
     print(f'Version {version}')
     print(f'Ваш IP: {extract_ip()}')
